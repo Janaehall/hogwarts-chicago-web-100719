@@ -7,7 +7,9 @@ export default class Pig extends Component {
 
   
     this.state = {
-      active: false
+      active: false,
+      imgUrl: '',
+      baconized: false
     }
   }
 
@@ -20,6 +22,23 @@ export default class Pig extends Component {
       active: !this.state.active
     })
   }
+
+  componentDidMount = () => {
+    fetch('https://api.giphy.com/v1/gifs/random?api_key=gaHS5XhmfJvnMMq0HwJ3yPlXQIUVllKx&tag=sausage,%20bacon&rating=G')
+    .then(resp => resp.json())
+    .then(image => {
+      this.setState({
+        imgUrl: image.data.images.fixed_height_small.url
+      })
+    })
+  }
+
+  toggleBaconized = () => {
+    this.setState({
+      baconized: !this.state.baconized
+    })
+  }
+
 
   isActive = () => {
     if(this.state.active) {
@@ -41,12 +60,13 @@ export default class Pig extends Component {
 
   
   render() {
+    console.log(this.state.imgUrl)
     return(
       <div className="pigTile">
-          <img src={require(`../hog-imgs/${this.formatName(this.props.hog.name)}.jpg`)}/>
+          <img className="pigImg" onClick={this.toggleBaconized} src={this.state.baconized? this.state.imgUrl : require(`../hog-imgs/${this.formatName(this.props.hog.name)}.jpg`)}/>
         <div className="hogInfo">{this.isActive()}</div>
         <button onClick={this.toggleActive} className="showMore">{this.state.active? "Show Less" : "Show More"}</button>
-        <button onClick={() => this.props.hideHog(this.props.hog.name)}>Hide Hog</button>
+        <button onClick={() => this.props.unHideHog(this.props.hog.name)}>Set this Piggy Free!</button>
        </div>
     )
   }

@@ -4,10 +4,12 @@ import Nav from './Nav'
 import hogs from '../porkers_data';
 import HogContainer from './HogContainer'
 import HiddenHogContainer from './HiddenHogContainer'
+import uuid from 'uuid'
 
 class App extends Component {
   constructor() {
     hogs.forEach(hog => hog.hidden = false)
+    hogs.forEach(hog => hog.id = uuid.v4())
     super()
     this.state = {
       hogs: hogs,
@@ -37,7 +39,6 @@ class App extends Component {
     })
     }
   }
-
   hogFilter = () => {
     if(this.state.greased){
       return this.state.hogs.filter(hog => hog.greased) 
@@ -56,7 +57,7 @@ class App extends Component {
     return (
       <div className="App">
           < Nav sortHogs={this.sortHogs} toggleGreased={this.toggleGreased} greased={this.state.greased} hidden={this.state.showHidden} toggleShowHidden={this.toggleShowHidden}/>
-          {this.state.showHidden ? <HiddenHogContainer hogs={this.hogFilter()} unhideHog={this.toggleHideHog}/> : null}
+          {this.state.showHidden ? <HiddenHogContainer hogs={this.hogFilter()} unHideHog={this.toggleHideHog}/> : null}
           < HogContainer hogs={this.hogFilter()} hideHog={this.toggleHideHog}/>
 
       </div>
