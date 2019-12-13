@@ -8,6 +8,33 @@
   display: inline;
 }
 
+.hogInfo {
+  height: 75px;
+  overflow:auto;
+}
+
+.hiddenHogsContent {
+  height:420px;
+  overflow: scroll;
+}
+
+.hiddenHogs {
+  border:solid;
+  width:1215px;
+  background-color:rgb(246, 243, 243);
+
+}
+
+.shownHogsContainer {
+  margin-top:10px;
+}
+
+.hiddenHogsHeader {
+  background-color:rgb(235, 229, 229);
+  margin:0;
+  border-bottom:solid;
+}
+
 .TwirlyPig:hover {
   transform: scale(1.5);
 }
@@ -54,6 +81,11 @@
 ul {
   list-style-type: none;
   list-style: none;
+  padding-left:20px;
+}
+
+li {
+  text-align:left;
 }
 
 .normalText ul {
@@ -78,11 +110,13 @@ ul {
   background-repeat: no-repeat;
   background-position: center 90%;
   float: left;
-  margin: 2%;
+  margin: 1%;
   padding: 1%;
   outline: #3B0B0B dotted thick;
   transition: 0.75s;
   opacity: 1;
+  /* width: 280px;
+  height: 425px; */
 }
 
 .minBackgroundSneak {
